@@ -1,5 +1,7 @@
 # Import python packages
+import requests
 import streamlit as st
+
 from snowflake.snowpark.functions import col
 
 # Get the current credentials
@@ -38,3 +40,6 @@ if ingredients_list and name_on_order:
         session.sql(my_insert_stmt).collect()
         st.success('Your Smoothie is ordered, '+name_on_order+'!', icon="✅")
 
+# New section to display smoothiefroot nutrition information
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
